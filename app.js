@@ -8,6 +8,7 @@ const cors = require("cors");
 /* importing Routes */
 let {userRouter}=require("./Routes/userRoute");
 let {blogRouter}=require("./Routes/blogRoute");
+let {commentRouter}=require("./Routes/commentRoute");
 
 
 /* connecting to dataBase */
@@ -35,3 +36,4 @@ app.use(cors("*"));
 
 app.use("/user",userRouter)
 app.use("/blog",blogRouter)
+app.use("/comment",commentRouter)
