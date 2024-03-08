@@ -22,10 +22,13 @@ let createComment = asyncHandler(async (obj) => {
 });
 
 /***@updateFunc */
-let updateComment = asyncHandler(async (obj) => {
-  let { oldMsg, msg } = obj;
+let updateComment = asyncHandler(async (id,obj) => {
 
-  let data = await comment.findOneAndUpdate({ msg: oldMsg }, { msg });
+  console.log(id);
+  console.log(obj);
+  let { msg } = obj;
+
+  let data = await comment.findOneAndUpdate({ _id:id}, { msg });
   if (data) {
     return "data has been updated";
   } else {

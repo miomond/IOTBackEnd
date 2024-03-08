@@ -42,9 +42,9 @@ commentRouter.delete(
 
 /******@updateComment */
 commentRouter.post(
-  "/update",
+  "/update/:id",
   asyncHandler(async (req, res) => {
-    let data = await updateBlog(req.body);
+    let data = await updateComment(req.params.id,req.body);
     res.send(data);
   })
 );
