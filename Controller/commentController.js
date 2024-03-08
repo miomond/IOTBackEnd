@@ -1,15 +1,5 @@
-let { comment } = require("../Model/commentModel");
+let { comment } = require("../Model/blogModel");
 const asyncHandler = require("express-async-handler");
-
-/****@find */
-// let findComment = asyncHandler(async (title) => {
-//   let data = await comment.find({ title });
-//   if (data.length > 0) {
-//     return data;
-//   } else {
-//     return "no data found";
-//   }
-// });
 
 /****@show */
 let showComment = asyncHandler(async () => {
@@ -17,42 +7,36 @@ let showComment = asyncHandler(async () => {
   if (data.length > 0) {
     return data;
   } else {
-    return "no data found";
+    return "no comments yet ";
   }
 });
 
 /****@createFunc */
 let createComment = asyncHandler(async (obj) => {
-  let {msg } = obj;
+  let { msg } = obj;
   let data = await comment.create({
-    msg
+    msg,
   });
 
-  return "data has been created";
+  return "msg has been created";
 });
 
 /***@updateFunc */
-// let updateComment = asyncHandler(async (title, obj) => {
-//   let { description, body, author } = obj;
+let updateComment = asyncHandler(async (obj) => {
+  let { oldMsg, msg } = obj;
 
-//   let data = await comment.findOneAndUpdate(
-//     { title },
-//     {
-//       title,
-//       description,
-//       body,
-//       author,
-//     }
-//   );
-//   if (data) {
-//     return "data has been updated";
-//   } else {
-//     return "no match data";
-//   }
-// });
+  let data = await comment.findOneAndUpdate({ msg: oldMsg }, { msg });
+  if (data) {
+    return "data has been updated";
+  } else {
+    return "no match data";
+  }
+});
 
 /***@deleteFunc */
-let deleteComment = asyncHandler(async (msg) => {
+let deleteComment = asyncHandler(async (obj) => {
+  let { msg } = obj;
+
   let data = await comment.findOneAndDelete({ msg });
   if (data) {
     return "data has been deleted";
@@ -66,5 +50,4 @@ module.exports = {
   createComment,
   deleteComment,
   updateComment,
-  findComment,
 };

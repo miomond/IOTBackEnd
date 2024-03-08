@@ -2,7 +2,12 @@ const mongoose = require("mongoose");
 const { isEmail } = require("validator");
 
 const userSchema = mongoose.Schema({
-  fullName: { type: String, required: true, unique: true },
+  fullName: {
+    type: String,
+    required: true,
+    unique: true,
+    match: /^[a-zA-Z0-9_-]{3,16}$/,
+  },
   nationalId: {
     type: Number,
     required: true,
@@ -20,11 +25,16 @@ const userSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    validate: [isEmail, "invalid email"],
     unique: true,
+    match: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
   },
 
-  password: { type: Number, required: true, min: 10 },
+  password: {
+    type: String,
+    required: true,
+    match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/g,
+  },
+
   phoneNr: {
     type: Number,
     required: true,

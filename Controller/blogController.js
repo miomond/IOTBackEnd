@@ -2,7 +2,7 @@ let { blog } = require("../Model/blogModel");
 const asyncHandler = require("express-async-handler");
 
 
-/****@find */
+/****@findBlog_By_title */
 let findBlog = asyncHandler(async (title) => {
   let data = await blog.find({ title });
   if (data.length > 0) {
@@ -11,6 +11,15 @@ let findBlog = asyncHandler(async (title) => {
     return "no data found";
   }
 });
+/****@findBlog_By_user*/
+// let findBlog_nationalId = asyncHandler(async (user) => {
+//   let data = await blog.find({ user });
+//   if (data.length > 0) {
+//     return data;
+//   } else {
+//     return "no data found";
+//   }
+// });
 
 /****@show */
 let showBlog = asyncHandler(async () => {
@@ -26,9 +35,9 @@ let showBlog = asyncHandler(async () => {
 
 /****@createFunc */
 let createBlog = asyncHandler(async (obj) => {
-  let { title, description, body, author } = obj;
+  let { title,imgUrl, body, author,user } = obj;
   let data = await blog.create({
-    title, description, body, author
+    title,imgUrl, body, author,user
   });
 
   return "data has been created";
@@ -36,12 +45,12 @@ let createBlog = asyncHandler(async (obj) => {
 
 /***@updateFunc */
 let updateBlog = asyncHandler(async (title, obj) => {
-  let { description, body, author  } = obj;
+  let { imgUrl, body, author,user  } = obj;
 
   let data = await blog.findOneAndUpdate(
     { title },
     {
-        title, description, body, author 
+       imgUrl ,body, author ,user
     }
   )
   if (data) {

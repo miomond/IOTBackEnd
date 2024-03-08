@@ -5,54 +5,46 @@ const asyncHandler = require("express-async-handler");
 
 ////// ControllerFuncs
 let {
-    showComment,
-    createComment,
-    deleteComment,
-    updateComment,
-    findComment,
-  } = require("../Controller/commentController");
+  showComment,
+  createComment,
+  deleteComment,
+  updateComment,
+} = require("../Controller/commentController");
 
-/**show_all_blog*/
+/**show_all_comments*/
 commentRouter.post(
   "/",
   asyncHandler(async (req, res) => {
-    res.send(await showBlog());
+    res.send(await showComment());
   })
 );
 
-/**find_by_title*/
 
-commentRouter.post(
-  "/find/:title",
-  asyncHandler(async (req, res) => {
-    res.send(await findBlog(req.params.title));
-  })
-);
 
-/*******createblog */
+/*******createcomment */
 commentRouter.post(
   "/add",
   asyncHandler(async (req, res) => {
-    let data = await createBlog(req.body);
+    let data = await createComment(req.body);
     res.send(data);
   })
 );
 
-/******@deleteblog */
+/******@deleteComment */
 
 commentRouter.delete(
-  "/delete/:title",
+  "/delete",
   asyncHandler(async (req, res) => {
-    let data = await deleteBlog(req.params.title);
+    let data = await deleteComment(req.body);
     res.send(data);
   })
 );
 
-/******@updateblog */
+/******@updateComment */
 commentRouter.post(
-  "/update/:title",
+  "/update",
   asyncHandler(async (req, res) => {
-    let data = await updateBlog(req.params.title, req.body);
+    let data = await updateBlog(req.body);
     res.send(data);
   })
 );

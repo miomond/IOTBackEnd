@@ -3,7 +3,7 @@ const express = require("express");
 let blogRouter = express.Router();
 const asyncHandler = require("express-async-handler");
 
-////// ControllerFuncs
+////// import ControllerFuncs
 let {
   showBlog,
   createBlog,
@@ -28,6 +28,14 @@ blogRouter.post(
     res.send(await findBlog(req.params.title));
   })
 );
+
+// /**find_by_Blog_id*/
+// blogRouter.post(
+//   "/findByUserId/:user",
+//   asyncHandler(async (req, res) => {
+//     res.send(await findBlog(req.params.user));
+//   })
+// );
 
 /*******createblog */
 blogRouter.post(
